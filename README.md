@@ -1,2 +1,47 @@
-# 🛠️ Alur Kerja (The Pipeline)1. Data Sanitization (Handling Duplicates)Integritas data adalah harga mati. Langkah pertama adalah menyisir dataset dan membuang baris yang berulang agar tidak terjadi bias pada model.Action: Membandingkan len(df) sebelum vs sesudah drop_duplicates().Object: titanic.xlsx.2. Outlier Management (Menjinakkan Pencilan)Data ekstrem seringkali merusak garis regresi atau klasifikasi. Saya menggunakan dua pendekatan:Interquartile Range (IQR): Menentukan batas Lower & Upper untuk memangkas nilai yang tidak masuk akal (Dataset California).Arbitrary Capper: Batasan berbasis logika bisnis. Contoh: Membatasi umur di dataset Titanic pada rentang 3-80 tahun agar distribusi tetap rasional.3. Missing Value Strategy (Strategi Data Bolong)Tidak semua data hilang harus dibuang. Saya menerapkan kebijakan berbasis persentase:The 20% Rule: Jika kolom kehilangan data lebih dari 20% (seperti kolom Revenue), maka kolom tersebut dianggap tidak layak dan langsung di-drop.Smart Imputation: * Data Numerik: Diisi dengan Median (lebih tahan terhadap pencilan dibanding Mean).Data Kategorikal: Diisi dengan Modus (nilai paling populer).4. Feature Transformation (Encoding & Scaling)Mengubah data agar "dimengerti" oleh mesin dan menyamakan "lapangan bermain" untuk semua angka:One-Hot Encoding (OHE): Untuk variabel kategori tanpa urutan (seperti Gender).Label Encoding: Mengonversi kategori biner menjadi 0 dan 1.Feature Scaling: Menyeimbangkan skala data menggunakan StandardScaler dan MinMaxScaler pada kolom tenure dan MonthlyCharges.📊 Assignment Log: Key SolutionsChallengeFeature FokusAction TakenOutlier DetectionMedInc, AveRooms, dll.Visualisasi intens menggunakan Histogram & Boxplot untuk melihat distribusi.IQR HandlingAveBedrmsEksekusi Capping pada outlier dan validasi ulang post-processing.Missing ValueHeadquartersAnalisis kerentanan (~4.61% hilang), diputuskan menggunakan Modus Imputation.Label EncodingTelco Churn DataCleaning data No internet service menjadi No sebelum dikoversi ke numerik.💻 Tech Stack & RequirementsPastikan environment kamu sudah terinstal library berikut:Bashpip install pandas numpy matplotlib seaborn scikit-learn feature-engine openpyxl
-📝 Project MetadataLead Engineer: Mr. Josan Mauritz Sharon Nunuhitu EngineeringCourse: Machine Learning (Week 3)Final Status: COMPLETED ✅
+#  USA Housing Price Prediction
+**Supervised Learning: Linear Regression Project**
+
+Proyek ini bertujuan untuk membangun model prediksi harga rumah di Amerika Serikat menggunakan dataset `USA_Housing`. Melalui pendekatan **Supervised Learning**, model ini belajar dari data historis fitur perumahan untuk memprediksi nilai jual secara akurat.
+
+---
+
+## Alur Pengerjaan
+
+### 1. Persiapan & Eksplorasi Data (EDA)
+Langkah awal melibatkan pembersihan data dan pemahaman karakteristik dataset:
+* **Dataset**: Terdiri dari 5.000 entri dengan fitur seperti pendapatan rata-rata area, usia rumah, jumlah kamar, dan populasi.
+* **Cleaning**: Menghapus kolom `Address` karena merupakan data teks non-kategorikal yang tidak relevan untuk regresi numerik.
+* **Visualisasi**: Menggunakan `pairplot` dan `correlation heatmap` untuk melihat hubungan antar variabel. Ditemukan bahwa **Avg. Area Income** memiliki korelasi terkuat dengan harga rumah.
+
+### 2. Training Model
+Proses pembangunan kecerdasan buatan:
+* **Splitting**: Membagi data menjadi 70% Training dan 30% Testing untuk validasi yang objektif.
+* **Algoritma**: Menggunakan **Linear Regression** dari library `Scikit-Learn`.
+* **Interpretasi**:
+    * **Intercept**: ~ -2,631,028
+    * **Koefisien Terbesar**: `Avg. Area House Age` dan `Avg. Area Number of Rooms` memiliki pengaruh harga per unit yang paling signifikan.
+
+### 3. Analisis Statistik (Signifikansi Fitur)
+Melakukan *deep dive* pada kualitas setiap prediktor:
+* **t-statistic**: Digunakan untuk mengukur stabilitas fitur. 
+* **Insight**: Fitur `Avg. Area Number of Bedrooms` memiliki nilai t-statistik terkecil (2.33), menunjukkan kontribusinya tidak se-signifikan fitur pendapatan atau usia rumah dalam model ini.
+
+### 4. Evaluasi & Uji Asumsi
+Memastikan model valid dan tidak "asal tebak":
+* **Uji Normalitas**: Menggunakan **Shapiro-Wilk Test** pada residual (p-value: 0.62). Karena p > 0.05, residual terdistribusi normal.
+* **Homoskedastisitas**: Melalui plot *Residuals vs Predicted*, data tersebar merata tanpa pola tertentu, menunjukkan varians error yang stabil.
+* **Metrik Performa**:
+    * **R-Squared (Test)**: 0.919 (Model mampu menjelaskan 91.9% variansi data).
+    * **MAE**: ~81,739 (Rata-rata kesalahan prediksi).
+
+---
+
+## Kesimpulan Model
+Model ini sangat handal dengan skor **R² mencapai 0.92**. Meskipun terdapat sedikit outlier, secara umum model mampu memprediksi harga rumah dengan rata-rata kesalahan hanya sekitar 8% dari harga rata-rata keseluruhan.
+
+---
+
+## Library yang Digunakan
+Pastikan library berikut sudah terinstal di lingkungan Python Anda:
+```bash
+pip install numpy pandas matplotlib seaborn scikit-learn statsmodels scipy
