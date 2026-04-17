@@ -45,3 +45,9 @@ Model ini sangat handal dengan skor **R² mencapai 0.92**. Meskipun terdapat sed
 Pastikan library berikut sudah terinstal di lingkungan Python Anda:
 ```bash
 pip install numpy pandas matplotlib seaborn scikit-learn statsmodels scipy
+
+Dibuat oleh  : Mr.Josan Mauritz Sharon Nunuhitu Engineering
+Nim          : 4222301060
+Mata Kuliah: Machine Learning (Week 4)
+
+Status: Selesai :)
