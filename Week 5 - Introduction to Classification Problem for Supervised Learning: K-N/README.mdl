@@ -1,62 +1,52 @@
-# Klasifikasi Spesies Bunga Iris dengan K-Nearest Neighbors (KNN)
+# 🌸 Iris Species Classification: Smart KNN Approach
 
-Proyek ini merupakan implementasi model Machine Learning **Supervised Learning** untuk mengklasifikasikan spesies bunga Iris. Proyek mencakup seluruh alur kerja data science, mulai dari eksplorasi data (EDA), pembersihan data, hingga optimasi model menggunakan Grid Search.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Library-Scikit--Learn-orange.svg)](https://scikit-learn.org/)
+[![Status](https://img.shields.io/badge/Project-Completed-green.svg)]()
 
-## 📋 Daftar Isi
-* [Deskripsi Proyek](#deskripsi-proyek)
-* [Dataset](#dataset)
-* [Teknologi yang Digunakan](#teknologi-yang-digunakan)
-* [Analisis dan Fitur](#analisis-dan-fitur)
-* [Langkah-langkah Implementasi](#langkah-langkah-implementasi)
-* [Hasil Evaluasi](#hasil-evaluasi)
+Proyek ini mengimplementasikan algoritma **K-Nearest Neighbors (KNN)** untuk mengklasifikasikan spesies bunga Iris dengan tingkat akurasi tinggi. Dilengkapi dengan **Hyperparameter Tuning** otomatis untuk memastikan model bekerja pada performa puncaknya.
 
 ---
 
-## 📝 Deskripsi Proyek
-Tujuan utama dari proyek ini adalah memprediksi spesies bunga Iris berdasarkan empat fitur numerik: panjang dan lebar sepal, serta panjang dan lebar kelopak. Algoritma yang digunakan adalah **K-Nearest Neighbors (KNN)**, yang dioptimalkan dengan pencarian parameter terbaik secara otomatis.
+## 🎯 Ringkasan Proyek
+Project ini tidak hanya sekadar membuat model, tapi juga mencakup siklus data science yang lengkap:
+* **Data Cleaning:** Teknik imputasi cerdas berdasarkan rata-rata per-spesies.
+* **EDA:** Visualisasi mendalam menggunakan Seaborn & Matplotlib.
+* **Optimization:** Pencarian parameter terbaik menggunakan `GridSearchCV`.
+* **Persistence:** Hasil evaluasi otomatis diekspor ke file Excel.
 
-## 📊 Dataset
-Dataset yang digunakan adalah **Iris Dataset** (`Iris.csv`) yang terdiri dari 150 sampel data dengan 3 jenis spesies:
-1. **Iris-setosa**
-2. **Iris-versicolor**
-3. **Iris-virginica**
+## 📊 Visualisasi & Analisis
+Kami menganalisis data melalui beberapa sudut pandang:
+- ✅ **Distribusi Fitur:** Melihat sebaran panjang sepal dan kelopak.
+- ✅ **Outlier Detection:** Menggunakan Boxplot untuk melihat variansi data tiap spesies.
+- ✅ **Correlation:** Memahami keterkaitan antara dimensi fisik bunga dengan jenis spesiesnya.
 
-**Fitur dalam dataset:**
-* `SepalLengthCm`
-* `SepalWidthCm`
-* `PetalLengthCm`
-* `PetalWidthCm`
+## 🛠️ Stack Teknologi
+| Library | Kegunaan |
+| :--- | :--- |
+| **Pandas** | Manipulasi dataframe & Analisis data |
+| **NumPy** | Komputasi numerik |
+| **Seaborn/Matplotlib** | Visualisasi data artistik & informatif |
+| **Scikit-Learn** | Machine learning, tuning, & evaluasi |
 
-## 🛠 Teknologi yang Digunakan
-* **Bahasa Pemrograman:** Python
-* **Library Analisis Data:** Pandas, NumPy
-* **Library Visualisasi:** Matplotlib, Seaborn
-* **Library Machine Learning:** Scikit-Learn (untuk KNN, Preprocessing, dan Model Evaluation)
+## ⚙️ Eksperimen Model (Grid Search)
+Untuk mendapatkan hasil terbaik, kami menguji berbagai kombinasi parameter:
+* **n_neighbors:** `[3, 5, 7]`
+* **weights:** `['uniform', 'distance']`
+* **metric:** `['euclidean', 'manhattan']`
 
-## 🔍 Analisis dan Fitur
-Proyek ini mengimplementasikan beberapa teknik penting:
-* **Exploratory Data Analysis (EDA):** Menggunakan histogram, boxplot, dan bar chart untuk memahami distribusi data antar spesies.
-* **Imputasi Data:** Memiliki fungsi cerdas untuk mengisi nilai yang hilang (*missing values*) pada `SepalLengthCm` berdasarkan rata-rata spesies yang bersangkutan.
-* **Label Encoding:** Mengubah label teks spesies menjadi angka agar dapat diproses oleh algoritma KNN.
-* **Feature Engineering:** Penghapusan fitur yang tidak relevan seperti `Id`.
+> **Note:** Model terbaik dipilih berdasarkan **F1-Score** tertinggi untuk menjaga keseimbangan antara Precision dan Recall.
 
-## 🚀 Langkah-langkah Implementasi
-1. **Persiapan:** Memanggil library dan memuat dataset.
-2. **EDA:** Visualisasi sebaran data untuk melihat korelasi antar fitur.
-3. **Preprocessing:** Menangani *null values* dan melakukan encoding pada kolom target.
-4. **Splitting:** Membagi data menjadi 70% Training set dan 30% Test set.
-5. **Training & Tuning:**
-   * Melatih model KNN dasar.
-   * Melakukan **Grid Search CV** untuk mencari parameter `n_neighbors`, `weights`, dan `metric` yang paling akurat.
-6. **Ekspor Hasil:** Menyimpan hasil perbandingan parameter ke file `hasil_gridsearch_knn.xlsx`.
+## 🚀 Cara Menjalankan Prediksi
+Setelah model dilatih, Anda dapat mencoba memprediksi data baru dengan format:
+`[SepalLength, SepalWidth, PetalLength, PetalWidth]`
 
-## 📈 Hasil Evaluasi
-Model akhir memberikan performa yang sangat baik diukur melalui:
-* **Accuracy Score:** Menunjukkan ketepatan prediksi keseluruhan.
-* **Confusion Matrix:** Melihat detail klasifikasi benar dan salah di setiap kelas.
-* **Classification Report:** Memberikan metrik Precision, Recall, dan F1-Score untuk setiap spesies.
+```python
+# Contoh Prediksi Data Baru
+new_data = np.array([[5.1, 3.5, 1.4, 0.2]]) 
+prediction = grid_search.best_estimator_.predict(new_data)
+result = le.inverse_transform(prediction)
 
----
-
-> **Catatan Penggunaan:**
-> Untuk
+print(f"Hasil Prediksi: {result[0]}")
+by Josan Mauriitz Sharon Nunuhitu
+Nim 4222301060
