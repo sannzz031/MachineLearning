@@ -1,6 +1,6 @@
 # 🤖 Machine Learning Lab: Preprocessing & Supervised Learning
 
-Repository ini berisi dokumentasi teknis dan implementasi praktis untuk **Week 3: Machine Learning**. Proyek ini mencakup alur kerja lengkap dari pengolahan data mentah (*Feature Engineering*) hingga pembangunan model prediksi menggunakan algoritma Regresi dan Klasifikasi.
+Repository ini berisi dokumentasi teknis dan implementasi praktis untuk **Week 6: Machine Learning**. Proyek ini mencakup alur kerja lengkap dari pengolahan data mentah (*Feature Engineering*) hingga pembangunan model prediksi menggunakan algoritma Regresi dan Klasifikasi.
 
 ---
 
