@@ -1,59 +1,63 @@
-# 🤖 Machine Learning Journey: Week 3 Lab Report
+# 🤖 Machine Learning Lab: Preprocessing & Supervised Learning
 
-Repository ini berisi dokumentasi lengkap pengerjaan praktikum Machine Learning minggu ketiga. Fokus utama materi adalah persiapan data (Preprocessing) dan implementasi model Supervised Learning (Regresi & Klasifikasi).
+Repository ini berisi dokumentasi teknis dan implementasi praktis untuk **Week 3: Machine Learning**. Proyek ini mencakup alur kerja lengkap dari pengolahan data mentah (*Feature Engineering*) hingga pembangunan model prediksi menggunakan algoritma Regresi dan Klasifikasi.
 
 ---
 
-## 🛠️ Phase 1: Feature Engineering
-Sebelum masuk ke pemodelan, data harus "dimasak" agar berkualitas tinggi. Berikut teknik yang diimplementasikan:
+## 🛠️ Phase 1: Feature Engineering & Preprocessing
+Sebelum masuk ke pemodelan, dilakukan optimalisasi data untuk memastikan performa model yang maksimal.
 
-* **Handling Duplicates**: Memastikan integritas data dengan menghapus baris ganda pada dataset Titanic.
-* **Outlier Management**: 
-    * **Metode IQR**: Digunakan pada *California Dataset* untuk membatasi nilai ekstrem secara statistik.
-    * **Metode Bisnis**: *Arbitrary Capping* pada data Titanic (Contoh: Membatasi usia 3-80 tahun).
+* **Duplicate Handling**: Pembersihan baris ganda pada dataset Titanic.
 * **Missing Value Strategy**: 
-    * Imputasi **Median** untuk data numerik (Rating).
-    * Imputasi **Modus** untuk data kategorikal.
-    * Penghapusan kolom jika data hilang > 20% (Contoh: Kolom Revenue).
+    * Imputasi **Median** untuk data numerik (Contoh: Fitur `Rating` & `Age`).
+    * Imputasi **Modus** untuk data kategorikal (Contoh: Fitur `Headquarters`).
+    * *Drop Column* untuk fitur dengan kekosongan > 20% (Contoh: Fitur `Revenue`).
+* **Outlier Management**: 
+    * **Metode IQR**: Digunakan pada *California Dataset* (Fitur `AveBedrms`).
+    * **Metode Bisnis**: *Arbitrary Capping* pada data Titanic (Membatasi usia 3-80 tahun).
 * **Feature Transformation**: 
-    * **Encoding**: Mengubah teks ke angka via *One-Hot Encoding* dan *Label Encoding*.
-    * **Scaling**: Menyamakan rentang data menggunakan *StandardScaler* dan *MinMaxScaler*.
+    * **Encoding**: *Label Encoding* & *One-Hot Encoding* untuk data kategorikal (`Sex`, `Embarked`, dll).
+    * **Scaling**: Implementasi `StandardScaler` & `MinMaxScaler` pada fitur `tenure` dan `MonthlyCharges`.
 
 ---
 
-## 📈 Phase 2: Supervised Learning - Regression
-Memprediksi harga rumah menggunakan dataset **USA_Housing.csv**.
+## 📈 Phase 2: Regression (USA Housing Price)
+Implementasi **Linear Regression** untuk memprediksi harga rumah.
 
-### Key Highlights:
-* **Exploratory Data Analysis (EDA)**: Menemukan korelasi kuat antara `Avg. Area Income` terhadap `Price`.
-* **Model Performance**:
-    * **R-Squared (Test)**: **0.919** (Model mampu menjelaskan 91.9% variansi data).
+* **Metrik Evaluasi**: 
+    * **R-Squared (Test)**: **0.919** (Sangat Akurat).
     * **MAE**: ~81,739.
-* **Statistical Analysis**: Menggunakan *t-statistic* untuk menguji signifikansi fitur. Ditemukan bahwa fitur jumlah kamar tidur memiliki pengaruh yang lebih kecil dibanding usia rumah.
+* **Insight Statistik**: Analisis *t-statistic* menunjukkan fitur `Avg. Area House Age` dan `Avg. Area Number of Rooms` memiliki pengaruh paling signifikan terhadap harga.
+
 
 ---
 
-## 🎯 Phase 3: Supervised Learning - Classification
-Memprediksi kelangsungan hidup penumpang menggunakan dataset **Titanic.csv**.
+## 🎯 Phase 3: Classification (Titanic Survival)
+Perbandingan berbagai algoritma untuk memprediksi tingkat kelangsungan hidup penumpang.
 
-### Perbandingan Model:
-| Algoritma | Akurasi | Keterangan |
+### 🏆 Model Comparison:
+| Algoritma | Akurasi | Status |
 | :--- | :---: | :--- |
-| **K-Nearest Neighbors** | 0.71 | Klasifikasi berbasis tetangga terdekat. |
-| **Decision Tree** | 0.77 | Klasifikasi berbasis pohon keputusan. |
-| **Naive Bayes** | **0.77** | Memberikan hasil probabilitas paling stabil di uji coba ini. |
+| **Naive Bayes** | **0.77** | **Best Performance** |
+| **K-Nearest Neighbors (KNN)** | 0.71 | Baseline |
+| **Decision Tree** | 0.77 | Competitive |
 
-### Optimization & Testing:
-* **Hyperparameter Tuning**: Menggunakan `GridSearchCV` untuk mencari parameter terbaik pada KNN (ditemukan metric *manhattan* dengan *n_neighbors* 3 sebagai yang terbaik).
-* **Prediksi Data Baru**: Model berhasil memprediksi probabilitas keselamatan penumpang baru (Kelas 3, Perempuan, 25 tahun) dengan hasil **Tidak Selamat** (94.5% probabilitas).
+### ⚙️ Optimization (GridSearchCV)
+Dilakukan pencarian parameter terbaik untuk model KNN menggunakan 5-fold Cross Validation:
+* **Best Params**: `{'metric': 'manhattan', 'n_neighbors': 3, 'weights': 'uniform'}`
+* **Output**: Hasil optimasi disimpan secara otomatis ke dalam file `hasil_gridsearch_knn.xlsx`.
+
+### 🔮 Prediksi Data Baru
+Model berhasil memprediksi penumpang baru (Kelas 3, Perempuan, Usia 25) dengan probabilitas **94.5% Tidak Selamat** (Label 0).
 
 ---
 
-## 🛠️ Requirements & Installation
-Untuk menjalankan notebook ini di lokal, pastikan library berikut sudah terinstal:
+## 🚀 Requirement & Installation
+Untuk menjalankan notebook ini, pastikan library berikut telah terinstal:
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn statsmodels scipy feature-engine openpyxl
+pip install pandas numpy matplotlib seaborn scikit-learn statsmodels scipy feature-engine openpyxl0
+
 📂 Struktur File
 Feature_Engineering.ipynb - Log pembersihan dan transformasi data.
 
