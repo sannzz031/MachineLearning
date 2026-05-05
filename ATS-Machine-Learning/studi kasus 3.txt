@@ -1,0 +1,19 @@
+Mirna adalah seorang pengusaha muda yang mendirikan sebuah start-up teknologi informasi yang sedang berkembang pesat. Kini, perusahaannya mulai merekrut banyak karyawan baru dari berbagai latar belakang.
+
+Namun, Mirna menghadapi tantangan:
+1. Bagaimana cara menentukan gaji yang adil dan kompetitif untuk calon karyawan baru?
+2. Apa saja faktor yang benar-benar mempengaruhi besar kecilnya gaji di perusahaannya selama ini?
+
+Untuk menjawab pertanyaan ini, Mirna memutuskan untuk membangun sebuah model prediksi gaji berbasis machine learning yang bisa digunakan oleh Mirna. Ia sudah menyiapkan dataset berisi informasi historis karyawan, meliputi:
+
+1. Usia
+
+2. Pengalaman kerja
+
+3. Jenis kelamin
+
+4. Tingkat pendidikan
+
+5. Gaji
+
+Bantulah Mirna untuk memprediksi gaji karyawannya dengan menggunakan data_karyawan.csv yang sudah disediakan Mirna. 
