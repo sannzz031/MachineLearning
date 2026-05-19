@@ -9,7 +9,7 @@ Repositori ini berisi implementasi lengkap tugas praktikum *Unsupervised Learnin
 * **NIM**: 4222301060  
 * **Kelas**: RE-B Pagi (6)  
 * **Instansi**: Politeknik Negeri Batam  
-* **Dosen Pengampu**: Rifky Afriza  
+* **Dosen Pengampu**: Bu Naura 
 
 ---
 
